@@ -10,6 +10,15 @@ services:
     depends_on:
       - db
 
+  test:
+    extends:
+      file: common-services.yml
+      service: webapp
+    command: bin/dev
+    env_file: env.test
+    depends_on:
+      - db
+
   db:
     image: public.ecr.aws/docker/library/postgres:17.2
     environment:

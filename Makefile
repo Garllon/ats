@@ -3,6 +3,8 @@ setup:
 	docker compose -f docker-compose.yml build
 	docker compose -f docker-compose.yml run --rm development bundle exec rails db:create
 	docker compose -f docker-compose.yml run --rm development bundle exec rails db:migrate
+	docker compose -f docker-compose.yml run --rm test bundle exec rails db:create
+	docker compose -f docker-compose.yml run --rm test bundle exec rails db:migrate
 	echo 'Successfully finished setup.'
 
 terminal:
@@ -18,4 +20,4 @@ seed:
 	docker compose -f docker-compose.yml run --rm development bundle exec rails db:seed
 
 rspec:
-	docker compose -f docker-compose.yml run --rm development bundle exec rspec
+	docker compose -f docker-compose.yml run --rm test bundle exec rspec
