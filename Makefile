@@ -16,3 +16,6 @@ development:
 
 seed:
 	docker compose -f docker-compose.yml run --rm development bundle exec rails db:seed
+
+rspec:
+	docker compose -f docker-compose.yml run --rm development bundle exec rspec
