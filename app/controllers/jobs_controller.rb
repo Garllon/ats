@@ -1,4 +1,4 @@
-class JobsController < ApplicationController
+class JobsController < ActionController::API
   def index
     jobs = Job.all.order(created_at: :desc)
 
