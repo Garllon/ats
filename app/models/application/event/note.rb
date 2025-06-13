@@ -1,3 +1,4 @@
 class Application::Event::Note < Application::Event
-  # metadata might contain { "note" => "Candidate was nervous during interview" }
+  include HasMetadata
+  metadata_keys :content
 end
