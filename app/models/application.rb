@@ -1,5 +1,6 @@
 class Application < ApplicationRecord
   has_many :events, class_name: 'Application::Event', dependent: :destroy
+  belongs_to :job
 
   def status
     last_event = events.where.not(type: 'Application::Event::Note').order(created_at: :desc).first

@@ -1,5 +1,6 @@
 class Job < ApplicationRecord
   has_many :events, class_name: 'Job::Event', dependent: :destroy
+  has_many :applications, dependent: :destroy
 
   def status
     last_event = events.order(created_at: :desc).first
