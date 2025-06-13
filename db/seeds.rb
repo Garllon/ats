@@ -81,6 +81,46 @@ def create_applications_for_software_engineer
   job.events.create!(type: 'Job::Event::Deactivated')
 end
 
+def create_applications_for_product_owner
+  job = Job.find_by(title: 'Product Manager')
+
+  # Applicatant 1
+  applicant_1 = Application.create!(
+    job: job,
+    candidate_name: "Leia Organa")
+
+  Application::Event::Interview.create!(
+    application: applicant_1,
+    metadata: {
+      interview_date: 3.days.ago },
+    created_at: 3.days.ago
+  )
+  Application::Event::Hired.create!(application: applicant_1,
+                                    metadata: { hire_date: 2.days.ago },
+                                    created_at: 2.days.ago)
+
+  # Applicant 2
+  applicant_2 = Application.create!(
+    job: job,
+    candidate_name: "Han Solo")
+
+  Application::Event::Rejected.create!(
+    application: applicant_2,
+    created_at: 1.day.ago
+  )
+
+  # Applicant 3
+  applicant_3 = Application.create!(
+    job: job,
+    candidate_name: "Chewbacca")
+
+  Application::Event::Note.create!(
+    application: applicant_3,
+    metadata: {
+      content: "Strong team player, consider for future openings."
+    })
+end
+
 Job::Event.delete_all
 Application::Event.delete_all
 Application.delete_all
@@ -88,3 +128,4 @@ Job.delete_all
 
 create_activated_jobs
 create_applications_for_software_engineer
+create_applications_for_product_owner
