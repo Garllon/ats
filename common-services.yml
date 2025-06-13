@@ -1,0 +1,14 @@
+services:
+  webapp:
+    platform: linux/amd64
+    tty: true
+    stdin_open: true
+    build:
+      dockerfile: Dockerfile.dev
+      context: .
+    volumes:
+      - type: bind
+        source: "."
+        target: "/rails"
+      - type: tmpfs
+        target: /rails/tmp

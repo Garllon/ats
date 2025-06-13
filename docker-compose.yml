@@ -1,0 +1,24 @@
+services:
+  development:
+    extends:
+      file: common-services.yml
+      service: webapp
+    command: bin/dev
+    env_file: env.development
+    ports:
+      - "16002:5000"
+    depends_on:
+      - db
+
+  db:
+    image: public.ecr.aws/docker/library/postgres:17.2
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - db-data:/etc/data
+      - ./data/db:/var/lib/postgresql/data
+
+volumes:
+  artifacts:
+  db-data:
